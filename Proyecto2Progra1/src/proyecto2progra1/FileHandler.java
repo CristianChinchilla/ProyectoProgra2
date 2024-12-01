@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package proyecto2proga1;
+package proyecto2progra1;
+
 
 import java.io.*;
 import java.util.Scanner;
+import proyecto2progra1.SalesManager;
 
 /**
  * @autor Eidan Alexandre Picado Leiva
