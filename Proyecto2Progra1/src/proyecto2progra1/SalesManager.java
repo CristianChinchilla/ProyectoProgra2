@@ -2,93 +2,112 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package proyecto2progra1;
+package proyectoproga2;
 
 /**
- * The SalesManager class handles the storage and management of sales records.
- * It uses a fixed-size array to store Sale objects and provides methods to
- * add new sales and retrieve existing sales.
- * 
- * @author Alexandre Picado Leiva
- * @author Cristian Chinchilla Fonseca
+ * @autor Eidan Alexandre Picado Leiva
+ * @autor Cristian Chinchilla Fonseca
+ *
+ * Class SalesManager - Handles storage and basic management of sales data using
+ * arrays.
  */
 public class SalesManager {
-    
-    // Maximum number of sales that can be stored
-    private final int MAX_SALES = 1000;
-    
-    // Array to store Sale objects
-    private Sale[] salesArray;
-    
-    // Current count of sales stored
-    private int salesCount;
-    
+
+    // Arrays for sales data: [products][channels (0 = physical store, 1 = online store)]
+    private int[][] salesData;
+
     /**
-     * Constructs a new SalesManager with an empty sales array.
+     * Constructor initializes the sales data array for a predefined number of
+     * products and channels.
      */
-    public SalesManager() {
-        salesArray = new Sale[MAX_SALES];
-        salesCount = 0;
+    public SalesManager(int numberOfProducts) {
+        salesData = new int[numberOfProducts][2];
     }
-    
+
     /**
-     * Adds a new Sale to the sales array.
+     * Registers a sale for a specific product and channel.
      *
-     * @param sale The Sale object to be added.
-     * @return true if the sale was added successfully, false if the array is full.
+     * @param productIndex The index of the product (0-based).
+     * @param channel The sales channel (0 for physical store, 1 for online
+     * store).
+     * @param quantity The quantity sold.
+     * @throws IllegalArgumentException if invalid channel or quantity.
      */
-    public boolean addSale(Sale sale) {
-        if (isFull()) {
-            System.out.println("Cannot add more sales. The sales array is full.");
-            return false;
+    public void registerSale(int productIndex, int channel, int quantity) {
+        if (channel < 0 || channel > 1) {
+            throw new IllegalArgumentException("Invalid channel. Use 0 for physical store or 1 for online store.");
         }
-        salesArray[salesCount] = sale;
-        salesCount++;
-        return true;
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative.");
+        }
+        salesData[productIndex][channel] += quantity;
     }
-    
+
     /**
-     * Retrieves all sales stored in the sales array.
+     * Calculates the total sales for a specific product across all channels.
      *
-     * @return An array containing all Sale objects up to the current sales count.
+     * @param productIndex The index of the product (0-based).
+     * @return The total sales for the specified product.
      */
-    public Sale[] getAllSales() {
-        Sale[] currentSales = new Sale[salesCount];
-        for (int i = 0; i < salesCount; i++) {
-            currentSales[i] = salesArray[i];
-        }
-        return currentSales;
+    public int getTotalSalesByProduct(int productIndex) {
+        return calculateTotalSales(salesData[productIndex], 0);
     }
-    
+
     /**
-     * Checks if the sales array is full.
+     * Recursively calculates the sum of sales for a specific array (product
+     * sales).
      *
-     * @return true if the array is full, false otherwise.
+     * @param sales Array of sales for a product.
+     * @param index Current index in the array.
+     * @return The sum of sales.
      */
-    public boolean isFull() {
-        return salesCount >= MAX_SALES;
+    private int calculateTotalSales(int[] sales, int index) {
+        if (index >= sales.length) {
+            return 0;
+        }
+        return sales[index] + calculateTotalSales(sales, index + 1);
     }
-    
+
     /**
-     * Returns the current number of sales stored.
+     * Retrieves the total sales across all products and channels.
      *
-     * @return The number of sales.
+     * @return Total sales.
      */
-    public int getSalesCount() {
-        return salesCount;
+    public int getTotalSales() {
+        return calculateGrandTotal(salesData, 0);
     }
-    
+
     /**
-     * Displays all sales stored in the sales array.
-     * Useful for debugging and testing purposes.
+     * Recursively calculates the total sales across all products.
+     *
+     * @param data Array representing sales data for all products.
+     * @param productIndex Current product being processed.
+     * @return Total sales across all products and channels.
      */
-    public void displayAllSales() {
-        if (salesCount == 0) {
-            System.out.println("No sales to display.");
-            return;
+    private int calculateGrandTotal(int[][] data, int productIndex) {
+        if (productIndex >= data.length) {
+            return 0;
         }
-        for (int i = 0; i < salesCount; i++) {
-            System.out.println(salesArray[i].toString());
+        return getTotalSalesByProduct(productIndex) + calculateGrandTotal(data, productIndex + 1);
+    }
+
+    /**
+     * Displays the sales data in a readable format (for debugging purposes).
+     */
+    public void displaySalesData() {
+        System.out.println("Sales Data:");
+        for (int i = 0; i < salesData.length; i++) {
+            System.out.println("Product " + i + ": Physical Store = " + salesData[i][0] + ", Online Store = " + salesData[i][1]);
         }
     }
+
+    /**
+     * Returns the sales data array.
+     *
+     * @return The bidimensional array containing sales data.
+     */
+    public int[][] getSalesData() {
+        return salesData;
+    }
+
 }
