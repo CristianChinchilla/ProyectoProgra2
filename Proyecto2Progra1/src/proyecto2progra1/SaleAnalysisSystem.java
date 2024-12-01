@@ -27,8 +27,6 @@ public class SaleAnalysisSystem {
         ReportGenerator reportGenerator = new ReportGenerator(salesManager);
         TrendAnalyzer trendAnalyzer = new TrendAnalyzer(salesManager);
         GUIHelper guiHelper = new GUIHelper();
-
-        // Iniciar la interfaz gráfica
         SwingUtilities.invokeLater(() -> createMainMenu(salesManager, fileHandler, reportGenerator, trendAnalyzer, guiHelper));
     }
 

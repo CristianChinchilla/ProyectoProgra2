@@ -34,7 +34,8 @@ public class SalesManager {
      */
     public void registerSale(int productIndex, int channel, int quantity) {
         if (channel < 0 || channel > 1) {
-            throw new IllegalArgumentException("Invalid channel. Use 0 for physical store or 1 for online store.");
+            throw new IllegalArgumentException("Invalid channel. Use 0 for "
+                    + "physical store or 1 for online store.");
         }
         if (quantity < 0) {
             throw new IllegalArgumentException("Quantity cannot be negative.");
