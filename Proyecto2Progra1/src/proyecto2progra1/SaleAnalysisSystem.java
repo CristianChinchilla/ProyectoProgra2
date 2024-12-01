@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package proyectoproga2;
+package proyecto2proga1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,14 +19,13 @@ import java.io.IOException;
 public class SaleAnalysisSystem {
 
     public static void main(String[] args) {
-        // Initialize core components
-        SalesManager salesManager = new SalesManager(5); // Assume 5 products for simplicity
+        
+        SalesManager salesManager = new SalesManager(5);
         FileHandler fileHandler = new FileHandler("sales_data");
         ReportGenerator reportGenerator = new ReportGenerator(salesManager);
         TrendAnalyzer trendAnalyzer = new TrendAnalyzer(salesManager);
         GUIHelper guiHelper = new GUIHelper();
 
-        // Launch the Swing-based main menu
         SwingUtilities.invokeLater(() -> createMainMenu(salesManager, fileHandler, reportGenerator, trendAnalyzer, guiHelper));
     }
 
@@ -41,10 +40,8 @@ public class SaleAnalysisSystem {
     private static void createMainMenu(SalesManager salesManager, FileHandler fileHandler, 
                                        ReportGenerator reportGenerator, TrendAnalyzer trendAnalyzer, 
                                        GUIHelper guiHelper) {
-        // Create the main JFrame
         JFrame mainFrame = guiHelper.createFrame("Sales Management System", 400, 300);
-
-        // Create main menu buttons
+        
         JPanel buttonPanel = guiHelper.createGridPanel(3, 2, 10, 10);
         JButton registerSaleButton = guiHelper.createButton("Register Sale", 150, 50);
         JButton saveSalesButton = guiHelper.createButton("Save Sales Data", 150, 50);
@@ -53,7 +50,6 @@ public class SaleAnalysisSystem {
         JButton analyzeTrendsButton = guiHelper.createButton("Analyze Trends", 150, 50);
         JButton exitButton = guiHelper.createButton("Exit", 150, 50);
 
-        // Add buttons to the panel
         buttonPanel.add(registerSaleButton);
         buttonPanel.add(saveSalesButton);
         buttonPanel.add(loadSalesButton);
@@ -61,19 +57,16 @@ public class SaleAnalysisSystem {
         buttonPanel.add(analyzeTrendsButton);
         buttonPanel.add(exitButton);
 
-        // Add action listeners to buttons
         registerSaleButton.addActionListener(e -> openRegisterSaleDialog(mainFrame, salesManager, guiHelper));
         saveSalesButton.addActionListener(e -> saveSalesData(mainFrame, fileHandler, salesManager, guiHelper));
         loadSalesButton.addActionListener(e -> loadSalesData(mainFrame, fileHandler, salesManager, guiHelper));
         showReportsButton.addActionListener(e -> reportGenerator.displayReportInterface());
         analyzeTrendsButton.addActionListener(e -> displayTrends(trendAnalyzer, guiHelper));
         exitButton.addActionListener(e -> System.exit(0));
-
-        // Add components to the frame
+        
         mainFrame.add(guiHelper.createLabel("Main Menu", 20, SwingConstants.CENTER), BorderLayout.NORTH);
         mainFrame.add(buttonPanel, BorderLayout.CENTER);
 
-        // Display the frame
         mainFrame.setVisible(true);
     }
 
@@ -137,4 +130,3 @@ public class SaleAnalysisSystem {
         JOptionPane.showMessageDialog(null, new JScrollPane(textArea), "Sales Trends Report", JOptionPane.INFORMATION_MESSAGE);
     }
 }
-
