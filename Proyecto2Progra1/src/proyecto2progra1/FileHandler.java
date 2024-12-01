@@ -56,29 +56,31 @@ public class FileHandler {
     }
 
     /**
-     * Loads sales data from a file for a specific month into the provided SalesManager instance.
-     * @param salesManager The SalesManager instance to populate with sales data.
-     * @param month The month to load data for.
-     * @throws IOException If an error occurs while reading the file.
-     */
-    public void loadSalesData(SalesManager salesManager, String month) throws IOException {
-        File file = new File(directoryPath + "/" + month + ".txt");
-        if (!file.exists()) {
-            throw new FileNotFoundException("File for the specified month does not exist.");
-        }
-        try (Scanner scanner = new Scanner(file)) {
-            int productIndex = 0;
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] parts = line.split(": ")[1].split(",");
-                int physicalStoreSales = Integer.parseInt(parts[0]);
-                int onlineStoreSales = Integer.parseInt(parts[1]);
-                salesManager.registerSale(productIndex, 0, physicalStoreSales); // Physical store sales
-                salesManager.registerSale(productIndex, 1, onlineStoreSales); // Online store sales
-                productIndex++;
-            }
+ * Loads sales data from a file for a specific month into the provided SalesManager instance.
+ * @param salesManager The SalesManager instance to populate with sales data.
+ * @param month The month to load data for.
+ * @throws IOException If an error occurs while reading the file.
+ */
+public void loadSalesData(SalesManager salesManager, String month) throws IOException {
+    File file = new File(directoryPath + "/" + month + ".txt");
+    if (!file.exists()) {
+        throw new FileNotFoundException("File for the specified month does not exist.");
+    }
+    int[][] loadedData = new int[salesManager.getSalesData().length][2];
+    try (Scanner scanner = new Scanner(file)) {
+        int productIndex = 0;
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split(": ")[1].split(",");
+            loadedData[productIndex][0] = Integer.parseInt(parts[0]);
+            loadedData[productIndex][1] = Integer.parseInt(parts[1]);
+            productIndex++;
         }
     }
+    // Replace the existing data
+    salesManager.setSalesData(loadedData);
+}
+
 
     /**
      * Displays all saved files in the directory.

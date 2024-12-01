@@ -109,5 +109,22 @@ public class SalesManager {
     public int[][] getSalesData() {
         return salesData;
     }
+    
+    /**
+ * Replaces the current sales data with the provided data.
+ * @param newSalesData A bidimensional array representing the new sales data.
+ */
+public void setSalesData(int[][] newSalesData) {
+    // Ensure the dimensions match
+    if (newSalesData.length != salesData.length || newSalesData[0].length != salesData[0].length) {
+        throw new IllegalArgumentException("Invalid sales data dimensions.");
+    }
+    for (int i = 0; i < salesData.length; i++) {
+        for (int j = 0; j < salesData[i].length; j++) {
+            salesData[i][j] = newSalesData[i][j];
+        }
+    }
+}
+
 
 }
