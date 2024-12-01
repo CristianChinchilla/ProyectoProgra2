@@ -5,9 +5,12 @@
 package proyecto2progra1;
 
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
-import proyecto2progra1.SalesManager;
+import java.io.FileNotFoundException;
 
 /**
  * @autor Eidan Alexandre Picado Leiva

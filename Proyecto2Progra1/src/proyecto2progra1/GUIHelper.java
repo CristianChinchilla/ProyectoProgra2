@@ -4,8 +4,18 @@
  */
 package proyecto2progra1;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.BorderLayout;
 
 /**
  * @autor Eidan Alexandre Picado Leiva
