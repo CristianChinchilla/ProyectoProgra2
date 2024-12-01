@@ -88,7 +88,8 @@ public class SalesManager {
         if (productIndex >= data.length) {
             return 0;
         }
-        return getTotalSalesByProduct(productIndex) + calculateGrandTotal(data, productIndex + 1);
+        return getTotalSalesByProduct(productIndex) + calculateGrandTotal(
+                data, productIndex + 1);
     }
 
     /**
@@ -97,7 +98,8 @@ public class SalesManager {
     public void displaySalesData() {
         System.out.println("Sales Data:");
         for (int i = 0; i < salesData.length; i++) {
-            System.out.println("Product " + i + ": Physical Store = " + salesData[i][0] + ", Online Store = " + salesData[i][1]);
+            System.out.println("Product " + i + ": Physical Store = " +
+                    salesData[i][0] + ", Online Store = " + salesData[i][1]);
         }
     }
 
@@ -115,7 +117,8 @@ public class SalesManager {
  * @param newSalesData A bidimensional array representing the new sales data.
  */
 public void setSalesData(int[][] newSalesData) {
-    if (newSalesData.length != salesData.length || newSalesData[0].length != salesData[0].length) {
+    if (newSalesData.length != salesData.length || newSalesData[0].length !=
+            salesData[0].length) {
         throw new IllegalArgumentException("Invalid sales data dimensions.");
     }
     for (int i = 0; i < salesData.length; i++) {

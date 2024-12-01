@@ -82,7 +82,8 @@ public class GUIHelper {
      * @param message The error message to display.
      */
     public void showErrorDialog(Component parentComponent, String message) {
-        JOptionPane.showMessageDialog(parentComponent, message, "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(parentComponent, message, "Error",
+                JOptionPane.ERROR_MESSAGE);
     }
 
     /**
@@ -91,7 +92,8 @@ public class GUIHelper {
      * @param message The success message to display.
      */
     public void showSuccessDialog(Component parentComponent, String message) {
-        JOptionPane.showMessageDialog(parentComponent, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(parentComponent, message, "Success",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**

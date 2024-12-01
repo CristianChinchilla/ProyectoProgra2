@@ -47,7 +47,8 @@ public class ReportGenerator {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        JLabel titleLabel = new JLabel("Sales Report Generator", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Sales Report Generator",
+                SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         frame.add(titleLabel, BorderLayout.NORTH);
 
@@ -105,7 +106,8 @@ public class ReportGenerator {
      */
     private String generateTotalSalesReport() {
         int totalSales = salesManager.getTotalSales();
-        return "=== Total Sales Report ===\nTotal Sales Across All Products and Channels: " + totalSales;
+        return "=== Total Sales Report ===\n"
+                + "Total Sales Across All Products and Channels: " + totalSales;
     }
 
     /**
@@ -113,12 +115,15 @@ public class ReportGenerator {
      * @return The formatted report as a String.
      */
     private String generateProductBreakdownReport() {
-        StringBuilder report = new StringBuilder("=== Product Breakdown Report ===\n");
+        StringBuilder report = new StringBuilder(
+                "=== Product Breakdown Report ===\n");
         int[][] salesData = salesManager.getSalesData();
         for (int i = 0; i < salesData.length; i++) {
             report.append("Product ").append(i).append(": ");
-            report.append("Physical Store = ").append(salesData[i][0]).append(", ");
-            report.append("Online Store = ").append(salesData[i][1]).append("\n");
+            report.append("Physical Store = ").append(
+                    salesData[i][0]).append(", ");
+            report.append("Online Store = ").append(
+                    salesData[i][1]).append("\n");
         }
         return report.toString();
     }

@@ -47,12 +47,15 @@ public class FileHandler {
      * @param month The month to save the data for.
      * @throws IOException If an error occurs while writing the file.
      */
-    public void saveSalesData(SalesManager salesManager, String month) throws IOException {
+    public void saveSalesData(SalesManager salesManager, String month) 
+            throws IOException {
         File file = new File(directoryPath + "/" + month + ".txt");
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter writer = new BufferedWriter(
+                new FileWriter(file))) {
             int[][] data = salesManager.getSalesData();
             for (int i = 0; i < data.length; i++) {
-                writer.write("Product " + i + ": " + data[i][0] + "," + data[i][1]);
+                writer.write("Product " + i + ": " + data[i][0] + "," + 
+                        data[i][1]);
                 writer.newLine();
             }
         }
@@ -64,10 +67,12 @@ public class FileHandler {
  * @param month The month to load data for.
  * @throws IOException If an error occurs while reading the file.
  */
-public void loadSalesData(SalesManager salesManager, String month) throws IOException {
+public void loadSalesData(SalesManager salesManager, String month) 
+        throws IOException {
     File file = new File(directoryPath + "/" + month + ".txt");
     if (!file.exists()) {
-        throw new FileNotFoundException("File for the specified month does not exist.");
+        throw new FileNotFoundException(
+                "File for the specified month does not exist.");
     }
     int[][] loadedData = new int[salesManager.getSalesData().length][2];
     try (Scanner scanner = new Scanner(file)) {

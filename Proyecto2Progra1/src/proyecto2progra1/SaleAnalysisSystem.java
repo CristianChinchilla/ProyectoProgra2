@@ -27,7 +27,8 @@ public class SaleAnalysisSystem {
         ReportGenerator reportGenerator = new ReportGenerator(salesManager);
         TrendAnalyzer trendAnalyzer = new TrendAnalyzer(salesManager);
         GUIHelper guiHelper = new GUIHelper();
-        SwingUtilities.invokeLater(() -> createMainMenu(salesManager, fileHandler, reportGenerator, trendAnalyzer, guiHelper));
+        SwingUtilities.invokeLater(() -> createMainMenu(salesManager,
+                fileHandler, reportGenerator, trendAnalyzer, guiHelper));
     }
 
     /**
@@ -39,17 +40,25 @@ public class SaleAnalysisSystem {
      * @param trendAnalyzer TrendAnalyzer instance.
      * @param guiHelper GUIHelper instance.
      */
-    private static void createMainMenu(SalesManager salesManager, FileHandler fileHandler,
-                                       ReportGenerator reportGenerator, TrendAnalyzer trendAnalyzer,
-                                       GUIHelper guiHelper) {
-        JFrame mainFrame = guiHelper.createFrame("Sales Management System", 400, 300);
+    private static void createMainMenu(
+            SalesManager salesManager, FileHandler fileHandler,
+            ReportGenerator reportGenerator, TrendAnalyzer trendAnalyzer,
+            GUIHelper guiHelper) {
+        
+        JFrame mainFrame = guiHelper.createFrame(
+                "Sales Management System", 400, 300);
 
         JPanel buttonPanel = guiHelper.createGridPanel(3, 2, 10, 10);
-        JButton registerSaleButton = guiHelper.createButton("Register Sale", 150, 50);
-        JButton saveSalesButton = guiHelper.createButton("Save Sales Data", 150, 50);
-        JButton loadSalesButton = guiHelper.createButton("Load Sales Data", 150, 50);
-        JButton showReportsButton = guiHelper.createButton("Show Reports", 150, 50);
-        JButton analyzeTrendsButton = guiHelper.createButton("Analyze Trends", 150, 50);
+        JButton registerSaleButton = guiHelper.createButton(
+                "Register Sale", 150, 50);
+        JButton saveSalesButton = guiHelper.createButton(
+                "Save Sales Data", 150, 50);
+        JButton loadSalesButton = guiHelper.createButton(
+                "Load Sales Data", 150, 50);
+        JButton showReportsButton = guiHelper.createButton(
+                "Show Reports", 150, 50);
+        JButton analyzeTrendsButton = guiHelper.createButton(
+                "Analyze Trends", 150, 50);
         JButton exitButton = guiHelper.createButton("Exit", 150, 50);
 
         buttonPanel.add(registerSaleButton);
@@ -59,10 +68,14 @@ public class SaleAnalysisSystem {
         buttonPanel.add(analyzeTrendsButton);
         buttonPanel.add(exitButton);
 
-        registerSaleButton.addActionListener(e -> openRegisterSaleDialog(mainFrame, salesManager, guiHelper));
-        saveSalesButton.addActionListener(e -> saveSalesData(mainFrame, fileHandler, salesManager, guiHelper));
-        loadSalesButton.addActionListener(e -> loadSalesData(mainFrame, fileHandler, salesManager, guiHelper));
-        showReportsButton.addActionListener(e -> reportGenerator.displayReportInterface());
+        registerSaleButton.addActionListener(e ->
+                openRegisterSaleDialog(mainFrame, salesManager, guiHelper));
+        saveSalesButton.addActionListener(e ->
+                saveSalesData(mainFrame, fileHandler, salesManager, guiHelper));
+        loadSalesButton.addActionListener(e ->
+                loadSalesData(mainFrame, fileHandler, salesManager, guiHelper));
+        showReportsButton.addActionListener(e ->
+                reportGenerator.displayReportInterface());
 
         analyzeTrendsButton.addActionListener(e -> {
             
@@ -73,12 +86,14 @@ public class SaleAnalysisSystem {
             textArea.setText(trendsReport);
             
            
-            JOptionPane.showMessageDialog(null, new JScrollPane(textArea), "Sales Trends Report", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, new JScrollPane(textArea),
+                    "Sales Trends Report", JOptionPane.INFORMATION_MESSAGE);
         });
 
         exitButton.addActionListener(e -> System.exit(0));
 
-        mainFrame.add(guiHelper.createLabel("Main Menu", 20, SwingConstants.CENTER), BorderLayout.NORTH);
+        mainFrame.add(guiHelper.createLabel("Main Menu", 20,
+                SwingConstants.CENTER), BorderLayout.NORTH);
         mainFrame.add(buttonPanel, BorderLayout.CENTER);
 
         mainFrame.setVisible(true);
@@ -94,20 +109,26 @@ public class SaleAnalysisSystem {
      * @param salesManager The SalesManager instance for registering the sale.
      * @param guiHelper The GUIHelper instance to create and manage components.
      */
-    private static void openRegisterSaleDialog(JFrame parentFrame, SalesManager salesManager, GUIHelper guiHelper) {
+    private static void openRegisterSaleDialog(JFrame parentFrame,
+            SalesManager salesManager, GUIHelper guiHelper) {
         JPanel panel = guiHelper.createGridPanel(4, 2, 5, 5);
         JTextField productField = new JTextField();
         JTextField channelField = new JTextField();
         JTextField quantityField = new JTextField();
 
-        panel.add(guiHelper.createLabel("Product Index (0-4):", 14, SwingConstants.LEFT));
+        panel.add(guiHelper.createLabel("Product Index (0-4):",
+                14, SwingConstants.LEFT));
         panel.add(productField);
-        panel.add(guiHelper.createLabel("Sales Channel (0 = Store, 1 = Online):", 14, SwingConstants.LEFT));
+        panel.add(guiHelper.createLabel(
+                "Sales Channel (0 = Store, 1 = Online):",
+                14, SwingConstants.LEFT));
         panel.add(channelField);
-        panel.add(guiHelper.createLabel("Quantity Sold:", 14, SwingConstants.LEFT));
+        panel.add(guiHelper.createLabel("Quantity Sold:",
+                14, SwingConstants.LEFT));
         panel.add(quantityField);
 
-        int result = JOptionPane.showConfirmDialog(parentFrame, panel, "Register Sale", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(parentFrame, panel,
+                "Register Sale", JOptionPane.OK_CANCEL_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
             try {
@@ -115,9 +136,11 @@ public class SaleAnalysisSystem {
                 int channel = Integer.parseInt(channelField.getText());
                 int quantity = Integer.parseInt(quantityField.getText());
                 salesManager.registerSale(productIndex, channel, quantity);
-                guiHelper.showSuccessDialog(parentFrame, "Sale registered successfully!");
+                guiHelper.showSuccessDialog(parentFrame,
+                        "Sale registered successfully!");
             } catch (Exception e) {
-                guiHelper.showErrorDialog(parentFrame, "Error registering sale: " + e.getMessage());
+                guiHelper.showErrorDialog(parentFrame,
+                        "Error registering sale: " + e.getMessage());
             }
         }
     }
@@ -132,14 +155,19 @@ public class SaleAnalysisSystem {
      * @param salesManager The SalesManager instance containing the sales data.
      * @param guiHelper The GUIHelper instance to manage components.
      */
-    private static void saveSalesData(JFrame parentFrame, FileHandler fileHandler, SalesManager salesManager, GUIHelper guiHelper) {
-        String month = JOptionPane.showInputDialog(parentFrame, "Enter the month to save data (e.g., January):");
+    private static void saveSalesData(JFrame parentFrame,
+            FileHandler fileHandler, SalesManager salesManager,
+            GUIHelper guiHelper) {
+        String month = JOptionPane.showInputDialog(parentFrame,
+                "Enter the month to save data (e.g., January):");
         if (month != null) {
             try {
                 fileHandler.saveSalesData(salesManager, month);
-                guiHelper.showSuccessDialog(parentFrame, "Sales data saved successfully for " + month + ".");
+                guiHelper.showSuccessDialog(parentFrame,
+                        "Sales data saved successfully for " + month + ".");
             } catch (IOException e) {
-                guiHelper.showErrorDialog(parentFrame, "Error saving data: " + e.getMessage());
+                guiHelper.showErrorDialog(parentFrame,
+                        "Error saving data: " + e.getMessage());
             }
         }
     }
@@ -155,14 +183,19 @@ public class SaleAnalysisSystem {
      * data.
      * @param guiHelper The GUIHelper instance to manage components.
      */
-    private static void loadSalesData(JFrame parentFrame, FileHandler fileHandler, SalesManager salesManager, GUIHelper guiHelper) {
-        String month = JOptionPane.showInputDialog(parentFrame, "Enter the month to load data (e.g., January):");
+    private static void loadSalesData(JFrame parentFrame,
+            FileHandler fileHandler, SalesManager salesManager,
+            GUIHelper guiHelper) {
+        String month = JOptionPane.showInputDialog(parentFrame,
+                "Enter the month to load data (e.g., January):");
         if (month != null) {
             try {
                 fileHandler.loadSalesData(salesManager, month);
-                guiHelper.showSuccessDialog(parentFrame, "Sales data loaded successfully for " + month + ".");
+                guiHelper.showSuccessDialog(parentFrame,
+                        "Sales data loaded successfully for " + month + ".");
             } catch (IOException e) {
-                guiHelper.showErrorDialog(parentFrame, "Error loading data: " + e.getMessage());
+                guiHelper.showErrorDialog(parentFrame,
+                        "Error loading data: " + e.getMessage());
             }
         }
     }

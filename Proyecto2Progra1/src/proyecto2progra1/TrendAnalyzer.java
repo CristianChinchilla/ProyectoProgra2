@@ -66,7 +66,8 @@ public class TrendAnalyzer {
         if (index >= sales.length - 1) {
             return true;
         }
-        return sales[index] <= sales[index + 1] && isIncreasing(sales, index + 1);
+        return sales[index] <= sales[index + 1] && isIncreasing(sales,
+                index + 1);
     }
 
     /**
@@ -79,7 +80,8 @@ public class TrendAnalyzer {
         if (index >= sales.length - 1) {
             return true;
         }
-        return sales[index] >= sales[index + 1] && isDecreasing(sales, index + 1);
+        return sales[index] >= sales[index + 1] && isDecreasing(sales,
+                index + 1);
     }
 
     /**
@@ -113,7 +115,8 @@ public class TrendAnalyzer {
         }
 
         if (sumFirstQuarter > sumLastQuarter) {
-            return "There seems to be higher sales in the first quarter (potential seasonality). ";
+            return "There seems to be higher sales in the first quarter"
+                    + " (potential seasonality). ";
         }
         return "No significant seasonality detected. ";
     }
@@ -129,11 +132,14 @@ public class TrendAnalyzer {
 
         for (int i = 1; i < sales.length; i++) {
             if (sales[i] - sales[i - 1] > threshold) {
-                peaks.append("Sales peak detected on day ").append(i).append(" (increase of ").append(sales[i] - sales[i - 1]).append(" units). ");
+                peaks.append("Sales peak detected on day ").append(i).append(
+                        " (increase of ").append(
+                                sales[i] - sales[i - 1]).append(" units). ");
             }
         }
 
-        return peaks.length() > 0 ? peaks.toString() : "No significant sales peaks detected. ";
+        return peaks.length() > 0 ? peaks.toString() :
+                "No significant sales peaks detected. ";
     }
 
     /**
@@ -141,7 +147,8 @@ public class TrendAnalyzer {
      * @return A string containing the sales trends report for all products.
      */
     public String generateTrendsReport() {
-        StringBuilder report = new StringBuilder("=== Sales Trends Report ===\n");
+        StringBuilder report = new StringBuilder(
+                "=== Sales Trends Report ===\n");
         int[][] salesData = salesManager.getSalesData();
         
         for (int i = 0; i < salesData.length; i++) {
