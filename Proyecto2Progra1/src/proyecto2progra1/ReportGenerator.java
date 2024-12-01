@@ -36,18 +36,15 @@ public class ReportGenerator {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        // Title Label
         JLabel titleLabel = new JLabel("Sales Report Generator", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         frame.add(titleLabel, BorderLayout.NORTH);
 
-        // Report Area
         JTextArea reportArea = new JTextArea();
         reportArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(reportArea);
         frame.add(scrollPane, BorderLayout.CENTER);
 
-        // Buttons Panel
         JPanel buttonPanel = new JPanel();
         JButton totalSalesButton = new JButton("Show Total Sales");
         JButton productBreakdownButton = new JButton("Show Product Breakdown");
@@ -58,7 +55,6 @@ public class ReportGenerator {
         buttonPanel.add(closeButton);
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Button Actions
         totalSalesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -13,7 +13,6 @@ package proyecto2progra1;
  */
 public class SalesManager {
 
-    // Arrays for sales data: [products][channels (0 = physical store, 1 = online store)]
     private int[][] salesData;
 
     /**
@@ -115,7 +114,6 @@ public class SalesManager {
  * @param newSalesData A bidimensional array representing the new sales data.
  */
 public void setSalesData(int[][] newSalesData) {
-    // Ensure the dimensions match
     if (newSalesData.length != salesData.length || newSalesData[0].length != salesData[0].length) {
         throw new IllegalArgumentException("Invalid sales data dimensions.");
     }
